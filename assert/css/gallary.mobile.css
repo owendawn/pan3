@@ -1,0 +1,382 @@
+body {
+  background-color: #111;
+  font: normal 100%/1.5 "Lato", sans-serif;
+  color: #CCC;
+  text-align: center
+}
+
+a{color:#CCC;text-decoration:none}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+
+
+#gallery-container {
+  font-size: 20px;
+  margin: auto;
+  position: relative;
+  max-width: 50em;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 1em
+}
+
+
+.controls {
+  text-align: center;
+  font-size: 1em;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: opacity .3s ease;
+  transition: opacity .3s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0
+}
+
+.control,
+.grid,
+.fs-toggle {
+  width: .66em;
+  height: .66em;
+  text-align: center;
+  line-height: .5em;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 10px
+}
+
+.showControls {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transition: opacity .6s 1s ease;
+  transition: opacity .6s 1s ease
+}
+
+.hideControls {
+  opacity: 0;
+  pointer-events: none
+}
+
+.icon-grid,
+.icon-arrow-left,
+.icon-arrow-right,
+.icon-fullscreen-exit,
+.icon-fullscreen {
+  display:inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAAUCAYAAAAk0RfcAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjUyMUEwQzQ3RUEzMjExRTJBOUU3QjM0OTA0NkRCOEEzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjUyMUEwQzQ4RUEzMjExRTJBOUU3QjM0OTA0NkRCOEEzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTIxQTBDNDVFQTMyMTFFMkE5RTdCMzQ5MDQ2REI4QTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTIxQTBDNDZFQTMyMTFFMkE5RTdCMzQ5MDQ2REI4QTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6D8Je9AAAI/klEQVR42uxbaWxVRRi9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');
+  background-repeat: no-repeat
+}
+
+.icon-grid {
+  background-position: 0 0
+}
+
+.icon-arrow-left {
+  background-position: -40px 0
+}
+
+.icon-arrow-right {
+  background-position: -80px 0
+}
+
+.icon-fullscreen-exit {
+  background-position: -120px 0
+}
+
+.icon-fullscreen {
+  background-position: -160px 0
+}
+.fs-toggle {
+  display: none;
+}
+
+
+.item {
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+  height: auto;
+}
+
+.item img,
+.item--big img {
+  width: 100%;
+  display:block;
+}
+
+.items--big {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none
+}
+
+.item--big {
+  position: absolute;
+  width: 60%;
+  height: auto;
+  left: 20%;
+  right: 20%;
+  top: 3em;
+  opacity: 0;
+  -webkit-transform: scale(.8);
+  transform: scale(.8)
+}
+.item--big .img-caption{
+  position:absolute;
+  width:100%;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color: rgba(0,0,0,0.6);
+  color:white;
+  padding:10px;
+  font-size:.8em;
+  text-align:center;
+}
+.fadeInScaleUp {
+  -webkit-animation: fadeInScaleUp .5s ease-out .6s forwards;
+  animation: fadeInScaleUp .5s ease-out .6s forwards;
+  z-index: 3
+}
+
+.fadeOut {
+  -webkit-animation: fadeOut .4s ease-out forwards;
+  animation: fadeOut .4s ease-out forwards;
+  z-index: 1
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@keyframes fadeInScaleUp {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(.8);
+    transform: scale(.8)
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes fadeInScaleUp {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(.8);
+    transform: scale(.8)
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+.scaleDownFadeOut {
+  -webkit-animation: scaleDownFadeOut .4s ease-in forwards;
+  animation: scaleDownFadeOut .4s ease-in forwards;
+  pointer-events: none
+}
+
+@keyframes scaleDownFadeOut {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  99% {
+    opacity: 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5)
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes scaleDownFadeOut {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  99% {
+    opacity: 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5)
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+.scaleUpFadeIn {
+  opacity: 0;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-animation: scaleUpFadeIn ease-in-out .4s forwards;
+  animation: scaleUpFadeIn ease-in-out .4s forwards;
+  -webkit-animation-duration: .4s;
+  animation-duration: .4s
+}
+
+@keyframes scaleUpFadeIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  1% {
+    opacity: 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5)
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes scaleUpFadeIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  1% {
+    opacity: 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5)
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+.showLastSecond {
+  opacity: 0;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-animation: showLastSecond ease-in-out .4s forwards;
+  animation: showLastSecond ease-in-out .4s forwards;
+  -webkit-animation-duration: .4s;
+  animation-duration: .4s
+}
+
+@keyframes showLastSecond {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  1% {
+    opacity: 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5)
+  }
+
+  99% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@-webkit-keyframes showLastSecond {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  1% {
+    opacity: 0;
+    -webkit-transform: scale(.5);
+    transform: scale(.5)
+  }
+
+  99% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1)
+  }
+}
+
+@media screen and (max-width: 30em) {
+  .item--big {
+    width: 80%;
+    right: 10%;
+    left: 10%
+  }
+}

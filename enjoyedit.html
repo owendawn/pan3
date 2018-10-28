@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <!-- 声明文档使用的字符编码 -->
+    <meta charset='utf-8'>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!-- 页面描述 -->
+    <meta name="description" content="不超过150个字符"/>
+    <!-- 页面关键词 -->
+    <meta name="keywords" content=""/>
+    <!-- 网页作者 -->
+    <meta name="author" content="pan"/>
+    <!-- 搜索引擎抓取 -->
+    <meta name="robots" content="index,follow"/>
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
+
+    <!-- iOS 设备 begin -->
+    <meta name="apple-mobile-web-app-title" content="标题">
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <!-- QQ强制全屏 -->
+    <!-- UC应用模式 -->
+    <!-- QQ应用模式 -->
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    
+    <!-- iOS 设备 end -->
+    <meta name="msapplication-TileColor" content="#000"/>
+    <!-- Windows 8 磁贴颜色 -->
+    <meta name="msapplication-TileImage" content="icon.png"/>
+    <!-- Windows 8 磁贴图标 -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"/>
+    <!-- 添加 RSS 订阅 -->
+    <link rel="shortcut icon" type="image/ico" href="/pan/public/img/favicon.ico"/>
+    <!-- 添加 favicon icon -->
+    <!--html5 旧浏览器支持-->
+    <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script>
+
+
+
+
+    <title >应用管理 - Pan 攀</title>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link href="//cdn.bootcss.com/datatables/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    
+    <link href="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;;
+        }
+
+        .tabs-left > .nav-tabs {
+            top: auto;
+            margin-bottom: 0;
+            float: left;
+        }
+
+        .nav-tabs {
+            margin-bottom: 0;
+            margin-left: 0;
+            border: 0;
+            top: 2px;
+            background-color: #eee;
+            -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+            -moz-box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+            box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+        }
+
+        .tabs-left > .nav-tabs > li {
+            float: none;
+        }
+
+        .nav-tabs > li {
+            margin-bottom: -2px;
+        }
+
+        .tabs-left > .nav-tabs > li > a, .tabs-right > .nav-tabs > li > a {
+            min-width: 60px;
+        }
+
+        .tabs-left > .nav-tabs > li > a, .tabs-left > .nav-tabs > li > a:focus, .tabs-left > .nav-tabs > li > a:hover {
+            margin: 0 -1px 0 0;
+        }
+
+        .nav-tabs > li:first-child > a {
+            margin-left: 0;
+            border-left: 1px solid #fbfbfb;
+        }
+
+        .tabs-left .tab-content, .tabs-right .tab-content {
+            overflow: auto;
+        }
+
+        .tab-content {
+            background-color: #fbfbfb;
+            padding: 16px 12px;
+            position: relative;
+            -webkit-box-shadow: 1px 0 10px 1px rgba(0, 0, 0, .3);
+            -moz-box-shadow: 1px 0 10px 1px rgba(0, 0, 0, .3);
+            box-shadow: 1px 0 10px 1px rgba(0, 0, 0, .3);
+        }
+
+        .tabs-left > .nav-tabs > li.active > a, .tabs-left > .nav-tabs > li.active > a:focus,
+        .tabs-left > .nav-tabs > li.active > a:hover {
+            border: 0;
+            border-left: 2px solid #5db2ff;
+            border-right-color: transparent;
+            margin: 0 -1px 0 -1px;
+            margin-top: 0px;
+            margin-right: -1px;
+            margin-bottom: 0px;
+            margin-left: -1px;
+            -webkit-box-shadow: -2px 0 3px 0 rgba(0, 0, 0, .3);
+            -moz-box-shadow: -2px 0 3px 0 rgba(0, 0, 0, .3);
+            box-shadow: -2px 0 3px 0 rgba(0, 0, 0, .3);
+        }
+
+        .nav-tabs > li > a, .nav-tabs > li > a:focus {
+            border-radius: 0 !important;
+            color: #777;
+            margin-right: -1px;
+            line-height: 12px;
+            position: relative;
+            z-index: 11;
+        }
+
+        .nav-tabs > li.active > a:active, .nav-tabs > li.active > a:focus {
+            background-color: #FBFBF7;
+        }
+
+        .link-buttons a i {
+            color: silver;
+        }
+
+        .link-buttons a i:hover {
+            color: grey;
+        }
+
+        .bgcontainer {
+            width: 100%;
+            height: 100%;
+        }
+        .bgcontainer.background {
+            padding-top: 15px;
+            background: -moz-linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background: -o-linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background: -webkit-linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background: linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background-attachment: fixed;
+        
+        }
+        .bgcontainer.backimage{
+            background: url('https://vi1.6rooms.com/live/2017/01/14/19/1002v1484392477716458698_b.jpg');
+            background-size: cover;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            filter:sepia(0) brightness(1) contrast(1);
+            transition: -webkit-filter 0.3s ease-in-out;
+        }
+        .bgcontainer:hover {
+            filter: sepia(0.2) brightness(0.9) contrast(1.3);
+        }
+        #imgdiv a{
+            cursor: pointer;;
+        }
+        .background .panel-body{padding:0;}
+        .list-group-item {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: -1px;
+        background-color: #fffdfd;
+        border: 1px solid #ddd;
+        opacity: 0.96;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .pointer{
+        cursor: pointer;;
+    }
+    .nav-menu > a:first-child {
+        color: #a0a0a0;
+    }
+    </style>
+
+    <title>Pan 攀</title>
+</head>
+
+<body>
+    <div class="bgcontainer" id="container">
+    
+    </div>
+
+    <script src="//cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    <script src="assert/util/PanUtil.js"></script>
+    <script type="text/babel" src="navbar.jsx"></script>
+    <script type="text/babel" src="enjoyedit.jsx"></script>
+    <script type="text/babel">
+        ReactDOM.render(
+            <MainLayout />,
+            document.getElementById('container')
+        );
+        </script>
+</body>
+</html>

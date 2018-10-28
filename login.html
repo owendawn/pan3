@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <!-- 声明文档使用的字符编码 -->
+    <meta charset='utf-8'>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!-- 页面描述 -->
+    <meta name="description" content="不超过150个字符"/>
+    <!-- 页面关键词 -->
+    <meta name="keywords" content=""/>
+    <!-- 网页作者 -->
+    <meta name="author" content="pan"/>
+    <!-- 搜索引擎抓取 -->
+    <meta name="robots" content="index,follow"/>
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
+
+    <!-- iOS 设备 begin -->
+    <meta name="apple-mobile-web-app-title" content="标题">
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <!-- QQ强制全屏 -->
+    <!-- UC应用模式 -->
+    <!-- QQ应用模式 -->
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- iOS 设备 end -->
+    <meta name="msapplication-TileColor" content="#000"/>
+    <!-- Windows 8 磁贴颜色 -->
+    <meta name="msapplication-TileImage" content="icon.png"/>
+    <!-- Windows 8 磁贴图标 -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"/>
+    <!-- 添加 RSS 订阅 -->
+    <link rel="shortcut icon" type="image/ico" href="/pan/public/img/favicon.ico"/>
+    <!-- 添加 favicon icon -->
+    <!--html5 旧浏览器支持-->
+    <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script>
+
+
+
+
+    <title>登录 - Pan 攀</title>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <link rel="stylesheet" href="assert/css/base.css"/>
+
+    <style>
+        body {
+            padding-top: 0;
+            margin: 0;
+        }
+
+        form {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 343px;
+            padding: 30px;
+            border: 1px solid rgba(0, 0, 0, .2);
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            background: rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+            -webkit-box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+            box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+            overflow: hidden;
+        }
+
+        textarea {
+            background: rgba(255, 255, 255, 0.4);
+            width: 276px;
+            height: 110px;
+            border: 1px solid rgba(255, 255, 255, .6);
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            display: block;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            color: #fff;
+            padding-left: 45px;
+            padding-right: 20px;
+            padding-top: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        input {
+            width: calc(100% - 60px);;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, .4);
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            -moz-background-clip: padding;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            display: block;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 16px;
+            color: #fff;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 16px;
+        }
+
+        input[type=submit] {
+            cursor: pointer;
+        }
+
+        input.name, input.email, input.message {
+            background: rgba(255, 255, 255, 0.4);
+            padding-left: 45px;
+        }
+
+        a {
+            color: #8f8e93;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #2ae6ff;
+            cursor: pointer;
+            text-decoration: underline;;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #fff;
+        }
+
+        :-moz-placeholder {
+            color: #fff;
+        }
+
+        ::-moz-placeholder {
+            color: #fff;
+        }
+
+        :-ms-input-placeholder {
+            color: #fff;
+        }
+
+        input:focus, textarea:focus {
+            background-color: rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            -webkit-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            overflow: hidden;
+        }
+
+        .btn {
+            width: 138px;
+            height: 44px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            float: right;
+            border: 1px solid #253737;
+            background: #416b68;
+            background: -webkit-gradient(linear, left top, left bottom, from(#6da5a3), to(#416b68));
+            background: -webkit-linear-gradient(top, #6da5a3, #416b68);
+            background: -moz-linear-gradient(top, #6da5a3, #416b68);
+            background: -ms-linear-gradient(top, #6da5a3, #416b68);
+            background: -o-linear-gradient(top, #6da5a3, #416b68);
+            background-image: -ms-linear-gradient(top, #6da5a3 0%, #416b68 100%);
+            padding: 10.5px 21px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            -webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, inset rgba(255, 255, 255, 0.7) 0 1px 0;
+            -moz-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, inset rgba(255, 255, 255, 0.7) 0 1px 0;
+            box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, inset rgba(255, 255, 255, 0.7) 0 1px 0;
+            text-shadow: #333333 0 1px 0;
+            color: #e1e1e1;
+        }
+
+        .btn:hover {
+            border: 1px solid #253737;
+            text-shadow: #333333 0 1px 0;
+            background: #416b68;
+            background: -webkit-gradient(linear, left top, left bottom, from(#77b2b0), to(#416b68));
+            background: -webkit-linear-gradient(top, #77b2b0, #416b68);
+            background: -moz-linear-gradient(top, #77b2b0, #416b68);
+            background: -ms-linear-gradient(top, #77b2b0, #416b68);
+            background: -o-linear-gradient(top, #77b2b0, #416b68);
+            background-image: -ms-linear-gradient(top, #77b2b0 0%, #416b68 100%);
+            color: #fff;
+        }
+
+        .btn:active {
+            margin-top: 1px;
+            text-shadow: #333333 0 -1px 0;
+            border: 1px solid #253737;
+            background: #6da5a3;
+            background: -webkit-gradient(linear, left top, left bottom, from(#416b68), to(#416b68));
+            background: -webkit-linear-gradient(top, #416b68, #609391);
+            background: -moz-linear-gradient(top, #416b68, #6da5a3);
+            background: -ms-linear-gradient(top, #416b68, #6da5a3);
+            background: -o-linear-gradient(top, #416b68, #6da5a3);
+            background-image: -ms-linear-gradient(top, #416b68 0%, #6da5a3 100%);
+            color: #fff;
+            -webkit-box-shadow: rgba(255, 255, 255, 0) 0 1px 0, inset rgba(255, 255, 255, 0.7) 0 1px 0;
+            -moz-box-shadow: rgba(255, 255, 255, 0) 0 1px 0, inset rgba(255, 255, 255, 0.7) 0 1px 0;
+            box-shadow: rgba(255, 255, 255, 0) 0 1px 0, inset rgba(255, 255, 255, 0.7) 0 1px 0;
+        }
+
+    </style>
+    <style>
+        .panel-body{  padding:0;z-index: -1;  }
+        #bg{z-index: 0;position: fixed;width:100%;height: 100%;}
+        iframe{width: 100%;height: 100%;border: 0;}
+        #theform{z-index: 99;position: relative;padding-top:70px;padding-bottom: 25px;}
+        #info{color:rgba(247, 150, 200, 0.7);}
+        .divide{width:100%;border-color: #908b8b;}
+        #storecheck{width: inherit;display: inline-block;height: inherit;}
+    </style>
+</head>
+
+<body >
+<div class="panel-body" id="container"  style="padding:0;z-index: -1;" frameborder="0" scrolling="no">
+
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/babel">
+class MainLayout extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            name:"",
+            password:"",
+            pwdsave:false,
+            info:""
+        }
+    }
+    changeValue(e) {
+        let kv={};
+        kv[e.target.name]=e.target.value;
+        this.setState(kv)
+    }
+    toggleValue(e){
+        let kv={};
+        kv[e.target.name]=!this.state.pwdsave;;
+        this.setState(kv)
+    }
+    login(e) {
+        let that=this;
+        if(that.state.name.trim()===""){
+            that.setState({info:"name is required!"});
+        }else if(that.state.password.trim()===""){
+           that.setState({info:"password is required!"});
+        }else{
+            $.get("/pan3/backend/api.php?m=UserController!login",this.state,function(re){
+                if(re.login){
+                    window.localStorage.setItem("token",re.token);
+                    window.location.href="index.html";
+                }else{
+                    that.setState({info:re.loginInfo});
+                }
+            },"json");
+        }
+        
+    }
+    render() {
+        return (
+            <div>
+                <div id="bg">
+                    <iframe src="loginbg.html" />
+                </div>
+                <div style={{ paddingTop: '5%' }}>
+                    <form action="javascript:void(0)" method="post" id="theform">
+                        <input
+                            name="name"
+                            placeholder="What is your name?"
+                            type="text"
+                            className="name"
+                            required
+                            value={this.state.name}
+                            onChange={this.changeValue.bind(this)} />
+                        <input
+                            name="password"
+                            placeholder="What is your password?"
+                            type="password"
+                            className="email"
+                            required
+                            value={this.state.password}
+                            onChange={this.changeValue.bind(this)}/>
+                        <div>
+                            <input
+                                type="checkbox"
+                                name="pwdsave"
+                                id="storecheck"
+                                checked={this.state.pwdsave}
+                                onChange={this.toggleValue.bind(this)}
+                                />
+                            <span className="text-silver">保存密码(30天)</span>
+                        </div>
+                        <button 
+                        className="btn" 
+                        onClick={this.login.bind(this)}
+                        >Login</button>
+                        <br />
+                        <span id="info">{this.state.info}</span>
+                        <br />
+                        <hr className="divide" />
+                        <a href="register.html">No Account ?</a>
+                    </form>
+                </div>
+            </div>
+        )
+    }
+}
+</script>
+<script type="text/babel">
+ReactDOM.render(
+    <MainLayout />,
+    document.getElementById('container')
+);
+</script>
+</body>
+
+</html>

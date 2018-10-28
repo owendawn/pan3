@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <!-- 声明文档使用的字符编码 -->
+    <meta charset='utf-8'>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!-- 页面描述 -->
+    <meta name="description" content="不超过150个字符"/>
+    <!-- 页面关键词 -->
+    <meta name="keywords" content=""/>
+    <!-- 网页作者 -->
+    <meta name="author" content="pan"/>
+    <!-- 搜索引擎抓取 -->
+    <meta name="robots" content="index,follow"/>
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
+
+    <!-- iOS 设备 begin -->
+    <meta name="apple-mobile-web-app-title" content="标题">
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <!-- QQ强制全屏 -->
+    <!-- UC应用模式 -->
+    <!-- QQ应用模式 -->
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- iOS 设备 end -->
+    <meta name="msapplication-TileColor" content="#000"/>
+    <!-- Windows 8 磁贴颜色 -->
+    <meta name="msapplication-TileImage" content="icon.png"/>
+    <!-- Windows 8 磁贴图标 -->
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"/>
+    <!-- 添加 RSS 订阅 -->
+    <link rel="shortcut icon" type="image/ico" href="/pan/public/img/favicon.ico"/>
+    <!-- 添加 favicon icon -->
+
+    <!--html5 旧浏览器支持-->
+    <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script>
+
+
+
+
+    <title >首页 - Pan 攀</title>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+    <link rel="stylesheet" href="/pan/public/css/index.css" media="screen" type="text/css"/>
+    <link rel="stylesheet" href="//cdn.bootcss.com/normalize/2.1.3/normalize.min.css"/>
+    <link async href="http://fonts.googleapis.com/css?family=Warnes" rel="stylesheet" type="text/css"/>
+    <link async href="http://fonts.googleapis.com/css?family=Zeyada" rel="stylesheet" type="text/css"/>
+    <link async href="http://fonts.googleapis.com/css?family=Princess%20Sofia" rel="stylesheet" type="text/css"/>
+    <style>
+    #iview{width: 100%;margin:0;padding:0;}
+    </style>
+</head>
+
+<body>
+
+    <div class="panel-body">
+        <div id="navbar"></div>
+         <div id="iview" style="width: 100%;margin:0;padding:0;">
+            <div
+                    
+                    data-iview:image="https://vi3.6rooms.com/live/2017/02/25/12/1002v1487998238517126140_b.jpg"
+                 data-iview:transition="slice-top-fade,slice-right-fade">
+                <div class="iview-caption caption1" data-x="80" data-y="200">dReam</div>
+                <div class="iview-caption" data-x="80" data-y="275" data-transition="wipeRight">To get what i want, i will Get better.
+                </div>
+                <div class="iview-caption" data-x="254" data-y="320" data-transition="wipeLeft"><i>Presented by a fighter</i></div>
+            </div>
+
+            <div
+                    
+                    data-iview:image="https://vi1.6rooms.com/live/2017/02/25/12/1002v1487998241680079630_b.jpg"
+                 data-iview:transition="zigzag-drop-top,zigzag-drop-bottom" data-iview:pausetime="3000">
+                <div class="iview-caption caption5" data-x="60" data-y="280" data-transition="wipeDown">The best preparation for tomorrow
+                    is doing your best today
+                </div>
+                <div class="iview-caption caption6" data-x="300" data-y="350" data-transition="wipeUp"><a href="#">~ to do</a></div>
+            </div>
+
+            <div
+                    
+                    data-iview:image="http://i65.tinypic.com/206nc68.jpg" data-iview:type="video"
+                 data-iview:transition="strip-right-fade,strip-left-fade">
+                
+                <div class="iview-caption caption2" data-x="450" data-y="340" data-transition="wipeRight">Video</div>
+                <div class="iview-caption caption3" data-x="600" data-y="345" data-transition="wipeLeft">Support</div>
+            </div>
+
+            <div
+                    
+                    data-iview:image="http://i63.tinypic.com/2ylmvyu.jpg"
+                    >
+                <div class="iview-caption caption4" data-x="50" data-y="80" data-width="312" data-transition="fade">
+                    Don't
+                </div>
+                <div class="iview-caption blackcaption" data-x="50" data-y="135" data-transition="wipeLeft"
+                     data-easing="easeInOutElastic">aim for success
+                </div>
+                <div class="iview-caption blackcaption" data-x="50" data-y="172" data-transition="wipeLeft"
+                     data-easing="easeInOutElastic">if you want it;
+                </div>
+                <div class="iview-caption blackcaption" data-x="50" data-y="209" data-transition="wipeLeft"
+                     data-easing="easeInOutElastic">just do what you love and believe in,
+                </div>
+                <div class="iview-caption blackcaption" data-x="50" data-y="246" data-transition="wipeLeft"
+                     data-easing="easeInOutElastic">and it will come naturally.
+                </div>
+                <div class="iview-caption blackcaption" data-x="50" data-y="283" data-transition="wipeLeft"
+                     data-easing="easeInOutElastic">&nbsp;&nbsp;_____
+                </div>
+                <div class="iview-caption blackcaption" data-x="50" data-y="320" data-transition="wipeLeft"
+                     data-easing="easeInOutElastic">&nbsp;&nbsp;~ &nbsp;&nbsp;&nbsp;&nbsp;keep on ……
+                </div>
+            </div>
+
+            <div
+                    
+                    data-iview:image="http://i65.tinypic.com/2ce13f7.jpg"
+                    >
+                <div class="iview-caption caption7" data-x="0" data-y="0" data-width="180" data-height="480"
+                     data-transition="wipeRight">
+                    <br>
+                    <br>
+                    <h1>The Courage</h1>
+                    <br>
+                    <h3 style="color:#888;">
+                    The
+                    <b><i>greatest test of courage</i></b>
+                    <br>
+                    <br>
+                     on earth
+                    <br>
+                        <br>
+                        <br>
+                    is to bear defeat
+                    <br>
+                    <br>
+                    <b>without losing heart.</b>
+                    </h3>
+                </div>
+            </div>
+
+            <div
+                    
+                    data-iview:image="http://i64.tinypic.com/2j5nzty.jpg"
+                    >
+                <div class="iview-caption caption5" data-x="60" data-y="150" data-transition="wipeLeft">What are you
+                    waiting for?
+                </div>
+                <div class="iview-caption caption6" data-x="160" data-y="230" data-transition="wipeRight">Get it Now!
+                </div>
+            </div>
+        
+        </div>
+
+        <div class="zzsc-content" >
+                <div class="second_neon">Hobby Favor</div>
+                <div class="first_neon">My Joy</div>
+                <div class="third_neon"><a href="enjoy.html">Enjoy Video</a></div>
+            </div>
+            
+    </div>
+    
+   
+    
+    <script src="//cdn.bootcss.com/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/raphael/2.2.7/raphael.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="/pan/public/lib/iview.js"></script>
+    <script type="text/babel" src="navbar.jsx"></script>
+    <script type="text/babel">
+        ReactDOM.render(
+            <Navbar />,
+            document.getElementById('navbar')
+        );
+        </script>
+    <script>
+        jQuery.fn.neonText = function (options) {
+            var options = jQuery.extend({
+                textColor: '#FFFFFF',
+                textSize: 'xx-large',
+                neonHighlight: '#FFFFFF',
+                neonHighlightColor: '#FF00DE',
+                neonHighlightHover: '#00FFFF',
+                neonFontHover: '#FFFFFF'
+            }, options)
+            return this.each(function () {
+                jQuery(this).css('color', options.textColor)
+                        .css('font-size', options.textSize)
+                        .css('text-shadow', '0 0 10px ' + options.neonHighlight + ',0 0 20px ' + options.neonHighlight + ',0 0 30px ' + options.neonHighlight + ',0 0 40px ' + options.neonHighlightColor + ',0 0 70px ' + options.neonHighlightColor + ',0 0 80px ' + options.neonHighlightColor + ',0 0 100px ' + options.neonHighlightColor)
+                        .hover(
+                        function () {
+                            jQuery(this)
+                                    .css('text-shadow', '0 0 10px ' + options.neonHighlight + ',0 0 20px ' + options.neonHighlight + ',0 0 30px ' + options.neonHighlight + ',0 0 40px ' + options.neonHighlightHover + ',0 0 70px ' + options.neonHighlightHover + ',0 0 80px ' + options.neonHighlightHover + ',0 0 100px ' + options.neonHighlightHover)
+                                    .css('color', options.neonFontHover);
+                        },
+                        function () {
+                            jQuery(this)
+                                    .css('color', options.textColor)
+                                    .css('text-shadow', '0 0 10px ' + options.neonHighlight + ',0 0 20px ' + options.neonHighlight + ',0 0 30px ' + options.neonHighlightColor + ',0 0 40px ' + options.neonHighlightColor + ',0 0 70px ' + options.neonHighlightColor + ',0 0 80px ' + options.neonHighlightColor + ',0 0 100px ' + options.neonHighlightColor)
+                        }
+                );
+            });
+        };
+        $(document).ready(function () {
+            $('#iview').iView({
+                pauseTime: 7000,
+                directionNav: false,
+                controlNav: true,
+                tooltipY: -15
+            });
+
+
+            $('.first_neon').neonText();
+            $('.second_neon').neonText({
+                textColor: 'white',
+                textSize: '40pt',
+                neonHighlight: 'white',
+                neonHighlightColor: '#008000',
+                neonHighlightHover: '#FFFF00',
+                neonFontHover: 'white'
+            });
+            $('.third_neon').neonText({
+                textColor: 'white',
+                textSize: '40pt',
+                neonHighlight: 'white',
+                neonHighlightColor: '#00FFFF',
+                neonHighlightHover: '#7FFF00',
+                neonFontHover: 'white'
+            });
+        });
+    </script>
+</body>
+</html>

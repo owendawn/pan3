@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <!-- 声明文档使用的字符编码 -->
+    <meta charset='utf-8'>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!-- 页面描述 -->
+    <meta name="description" content="不超过150个字符"/>
+    <!-- 页面关键词 -->
+    <meta name="keywords" content=""/>
+    <!-- 网页作者 -->
+    <meta name="author" content="pan"/>
+    <!-- 搜索引擎抓取 -->
+    <meta name="robots" content="index,follow"/>
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
+
+    <!-- iOS 设备 begin -->
+    <meta name="apple-mobile-web-app-title" content="标题">
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    
+    <!-- QQ强制全屏 -->
+    
+    <!-- UC应用模式 -->
+    
+    <!-- QQ应用模式 -->
+    
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    
+    <!-- iOS 设备 end -->
+
+    <meta name="msapplication-TileColor" content="#000"/>
+    <!-- Windows 8 磁贴颜色 -->
+    <meta name="msapplication-TileImage" content="icon.png"/>
+    <!-- Windows 8 磁贴图标 -->
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"/>
+    <!-- 添加 RSS 订阅 -->
+    <link rel="shortcut icon" type="image/ico" href="/pan/public/img/favicon.ico"/>
+    <!-- 添加 favicon icon -->
+
+    <!--html5 旧浏览器支持-->
+    <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script>
+
+    <title>应用中心 - Pan 攀</title>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+    <script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/normalize/2.1.3/normalize.min.css"/>
+    <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="">
+
+    <script src="//cdn.bootcss.com/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+    <style>
+
+/*==================================输入框特效样式================================================*/
+        input {
+            border: 2px solid #5E6C77;
+            font-size: 1.5em;
+            padding: .25em .5em .3125em;
+            color: #5E6C77;
+            border-radius: .25em;
+            background: transparent;
+            -webkit-transition: all .100s;
+            transition: all .100s;
+        }
+        input:focus {
+            outline: none;
+            color: #A2ACB3;
+            border-color: #A2ACB3;
+        }
+        input.keyup {
+            color: white;
+            border-color: white;
+            text-shadow: 0 0 .125em white;
+            box-shadow: 0 0 .25em white,inset 0 0 .25em white;
+        }
+
+        body {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        canvas {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        input {
+            font-family: "Arial Rounded MT Bold","Helvetica Rounded",Arial,sans-serif;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #5E6C77;
+            text-shadow: 0 0 .125em transparent;
+            -webkit-transition: all .25s;
+            transition: all .25s;
+        }
+
+        input:focus::-webkit-input-placeholder {
+            opacity: .5;
+        }
+
+        ::-moz-placeholder {
+            color: #5E6C77;
+            text-shadow: 0 0 .125em transparent;
+            -webkit-transition: all .25s;
+            transition: all .25s;
+        }
+
+        input:focus::-moz-placeholder {
+            opacity: .5;
+        }
+
+        :-ms-input-placeholder {
+            color: #5E6C77;
+            text-shadow: 0 0 .125em transparent;
+            -webkit-transition: all .25s;
+            transition: all .25s;
+        }
+
+        input:focus:-ms-input-placeholder {
+            opacity: .5;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        html {
+            background: #282E33;
+        }
+        .form-control:focus {
+            border-color: #b4b3b3;
+        }
+        /*===================按钮样式==================================*/
+        .a_demo_four {
+            background-color:#3bb3e0;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size:12px;
+            text-decoration:none;
+            color:#fff;
+            border:1px;
+            position:relative;
+            padding:10px 20px;
+            padding-right:50px;
+            background-image: linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+            background-image: -o-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+            background-image: -moz-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+            background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+            background-image: -ms-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+            background-image: -webkit-gradient(
+                    linear,
+                    left bottom,
+                    left top,
+                    color-stop(0, rgb(44,160,202)),
+                    color-stop(1, rgb(62,184,229))
+            );
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+            -moz-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+            -o-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+            box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+        .a_demo_four:hover{
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+            -o-transform: scale(1.05);
+            transform: scale(1.05);
+            text-decoration: none;;
+            color:white;
+        }
+
+        .a_demo_four:active {
+            top:3px;
+            background-image: linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+            background-image: -o-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+            background-image: -moz-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+            background-image: -webkit-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+            background-image: -ms-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+            background-image: -webkit-gradient(
+                    linear,
+                    left bottom,
+                    left top,
+                    color-stop(0, rgb(62,184,229)),
+                    color-stop(1, rgb(44,160,202))
+            );
+            -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+            -moz-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+            -o-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+            box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #156785, 0px 5px 3px #999;
+        }
+
+        .a_demo_four::before {
+            background-color:#2591b4;
+            /*background-image:url(../images/right_arrow.png);*/
+            content: "\e003";
+            font-family: 'Glyphicons Halflings';
+            padding:3px;
+            background-repeat:no-repeat;
+            background-position:center center;
+            width:20px;
+            height:20px;
+            position:absolute;
+            right:15px;
+            top:50%;
+            margin-top:-9px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -o-border-radius: 50%;
+            border-radius: 50%;
+            -webkit-box-shadow: inset 0px 1px 0px #052756, 0px 1px 0px #60c9f0;
+            -moz-box-shadow: inset 0px 1px 0px #052756, 0px 1px 0px #60c9f0;
+            -o-box-shadow: inset 0px 1px 0px #052756, 0px 1px 0px #60c9f0;
+            box-shadow: inset 0px 1px 0px #052756, 0px 1px 0px #60c9f0;
+            -webkit-transition:all 0.3s ease-in-out;
+            -moz-transition:all 0.3s ease-in-out;
+            -o-transition:all 0.3s ease-in-out;
+            transition:all 0.3s ease-in-out;
+            -webkit-transform:rotate(0deg);
+            -moz-transform:rotate(0deg);
+            -ms-transform:rotate(0deg);
+            -o-transform:rotate(0deg);
+            transform:rotate(0deg);
+        }
+        .a_demo_four:hover::before {
+            opacity:0.5;
+            -webkit-transform:rotate(360deg);
+            -moz-transform:rotate(360deg);
+            -ms-transform:rotate(360deg);
+            -o-transform:rotate(360deg);
+            transform:rotate(360deg);
+        }
+
+        .a_demo_four:active::before {
+            top:50%;
+            margin-top:-12px;
+            -webkit-box-shadow: inset 0px 1px 0px #60c9f0, 0px 3px 0px #0e3871, 0px 6px 3px #1a80a6;
+            -moz-box-shadow: inset 0px 1px 0px #60c9f0, 0px 3px 0px #0e3871, 0px 6px 3px #1a80a6;
+            -o-box-shadow: inset 0px 1px 0px #60c9f0, 0px 3px 0px #0e3871, 0px 6px 3px #1a80a6;
+            box-shadow: inset 0px 1px 0px #60c9f0, 0px 3px 0px #0e3871, 0px 6px 3px #1a80a6;
+            opacity:1;
+            -webkit-transform:rotate(360deg);
+            -moz-transform:rotate(360deg);
+            -ms-transform:rotate(360deg);
+            -o-transform:rotate(360deg);
+            transform:rotate(360deg);
+            -webkit-transition:all 0.1s ease-in-out;
+            -moz-transition:all 0.1s ease-in-out;
+            -o-transition:all 0.1s ease-in-out;
+            transition:all 0.1s ease-in-out;
+        }
+
+    </style>
+
+    <style>
+        /*=====================自定义特效=====================================*/
+        .background {
+            background: -moz-linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background: -o-linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background: -webkit-linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background: linear-gradient(148deg, rgba(253, 43, 43, 0.8) 0%, rgba(255, 165, 0, 0.8) 13%, rgba(84, 255, 84, 0.8) 30%,rgba(28, 230, 28, 0.8) 40%,rgba(46, 222, 222, 0.8) 50%,rgba(37, 37, 255, 0.8) 70%,rgba(245, 72, 245, 0.8) 100%);
+            background-attachment: fixed;
+            width: 100%;height: 100%;
+        }
+
+        #nav-label{
+            position: relative;
+            height:30%;
+            padding:0;
+        }
+        .panel-body{
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 100%;;
+        }
+        #lightgallery li>a .fa{
+            font-size: 14pt;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 11px;
+            padding: 8px;
+            color: silver;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        #lightgallery .covers{
+            display: none;
+        }
+        #lightgallery li:hover .covers{
+            display: block;
+            background: rgba(0,0,0,0.5);
+        }
+        .nav-menu > a:first-child {
+            color: #D6CECE;
+        }
+
+        .nav-menu > a:hover:first-child {
+            color: white;
+        }
+
+
+/*mobile part*/
+#leftarticle, #rightarticle {
+            color: #CAF5F1;
+            font-family: 'Alright Sans Light', 'Open Sans', sans-serif;
+        }
+
+        #nav-label {
+            position: relative;
+            height: 30%;
+            padding: 0;
+        }
+
+        .panel-body {
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 100%;;
+        }
+
+        .items--small {
+            width: 48%;
+            display: inline-block;
+        }
+    </style>
+
+
+    <title>Pan 攀</title>
+    <script>
+    Object.defineProperty(window,"particles",{configurable:true});
+    </script>
+</head>
+
+<body>
+    <div class="background" id="container">
+       
+    </div>
+    <script src="assert/util/PanUtil.js"></script>
+
+   
+
+    
+    
+
+    <script type="text/babel" src="navbar.jsx"></script>
+    <script type="text/babel" src="enjoy.jsx"></script>
+    <script type="text/babel">
+        ReactDOM.render(
+            <MainLayout />,
+            document.getElementById('container')
+        );
+    </script>
+</body>
+</html>
