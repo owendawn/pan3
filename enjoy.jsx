@@ -113,8 +113,8 @@ class MainLayout extends React.Component {
         }
     }
 
-    jumpUrl(obj) {
-        window.open(obj.attributes["data-link"].value);
+    jumpUrl(link) {
+        window.open(link);
     }
     checklogin(islogin){
         if(!islogin){
@@ -189,7 +189,7 @@ class MainLayout extends React.Component {
                                                         <i className="fa fa-search" data-src={it.img} data-link="www.baidu.com">
                                                             <img src={it.img} style={{ display: "none" }} />
                                                         </i>
-                                                        <i data-link={it.link} onClick={this.jumpUrl.bind(this)} className="fa fa-link"></i>
+                                                        <i data-link={it.link} onClick={this.jumpUrl.bind(this,it.link)} className="fa fa-link"></i>
                                                     </div>
                                                 </div>
                                             </a>
