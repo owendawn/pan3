@@ -1,0 +1,605 @@
+/*@import url('http://fonts.useso.com/css?family=Ubuntu:regular,italic,bold,bolditalic&subset=cyrillic,greek,latin');*/
+
+/* =========================
+css/reset.css
+==========================*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    vertical-align:baseline;
+    background:transparent;
+}
+body {
+    line-height:1;
+}
+article,aside,details,figcaption,figure,
+footer,header,menu,nav,section {
+    display:block;
+}
+nav ul {
+    list-style:none;
+}
+blockquote, q {
+    quotes:none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+del {
+    text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+input, select {
+    vertical-align:middle;
+}
+
+/*=======================================
+css/styles.css
+===============================*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Ubuntu', Tahoma;
+    line-height: 100%;
+    outline: none;
+}
+
+html {
+    border: 0px;
+}
+
+body {
+    color: #FFF;
+    font-size: 9pt;
+    cursor: default;
+}
+
+.clear {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+    height: 0px;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #d0d9de;
+}
+
+a:hover {
+    color: #FFF;
+}
+
+#cont {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /*position: absolute;
+    top: 250px;
+    left: 0;*/
+    z-index: 70;
+    overflow: auto;
+}
+
+.copy {
+    text-shadow: #111 1px 1px 0px;
+    text-align: center;
+    padding: 10px 0px;
+    line-height: 150%;
+}
+
+
+/*=======================================
+css/iview.css
+==========================================*/
+/* The slider */
+.iviewSlider {
+    overflow: hidden;
+}
+
+/* The timer in the Slider */
+#iview-timer {
+    position: absolute;
+    z-index: 100;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#iview-timer div {
+    border-radius: 3px;
+}
+
+/* The Preloader in the Slider */
+#iview-preloader {
+    position: absolute;
+    z-index: 1000;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: #000 1px solid;
+    padding: 1px;
+    width: 100px;
+    height: 3px;
+}
+#iview-preloader div {
+    float: left;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    height: 3px;
+    background: #000;
+    width: 0px;
+}
+
+/* The strips and boxes in the Slider */
+.iview-strip {
+    display:block;
+    position:absolute;
+    z-index:5;
+}
+.iview-block {
+    display:block;
+    position:absolute;
+    z-index:5;
+}
+
+/* Direction nav styles (e.g. Next & Prev) */
+.iview-directionNav a {
+    position:absolute;
+    top:45%;
+    z-index:9;
+    cursor:pointer;
+}
+.iview-prevNav {
+    left:0px;
+}
+.iview-nextNav {
+    right:0px;
+}
+
+/* Control nav styles (e.g. 1,2,3...) */
+.iview-controlNav {
+    position:absolute;
+    z-index:9;
+}
+.iview-controlNav a {
+    z-index:9;
+    cursor:pointer;
+}
+.iview-controlNav a.active {
+    font-weight:bold;
+}
+.iview-controlNav .iview-items ul {
+    list-style: none;
+}
+.iview-controlNav .iview-items ul li {
+    display: inline;
+    position: relative;
+}
+.iview-controlNav .iview-tooltip {
+    position: absolute;
+}
+
+/* The captions in the Slider */
+.iview-caption {
+    position:absolute;
+    z-index:4;
+    overflow: hidden;
+    cursor: default;
+}
+
+/* The video show in the Slider */
+.iview-video-show {
+    background: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 101;
+}
+.iview-video-show .iview-video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.iview-video-show .iview-video-container a.iview-video-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #222;
+    color: #FFF;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    line-height: 29px;
+    font-size: 22px;
+    font-weight: bold;
+    overflow: hidden;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+.iview-video-show .iview-video-container a.iview-video-close:hover {
+    background: #444;
+}
+
+/*===========================================
+css/skin1/style.css
+=====================================*/
+.container {
+    display: block;
+    width: 910px;
+    margin: 0px auto;
+}
+
+#iview {
+    display: block;
+    width: 900px;
+    height: 500px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+    -webkit-box-shadow: 0 38px 30px -18px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 38px 30px -18px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 38px 30px -18px rgba(0, 0, 0, 0.5);
+    margin: 40px auto;
+}
+
+#iview .iviewSlider {
+    display: block;
+    width: 900px;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.iview-controlNav {
+    position: absolute;
+    bottom: 30px;
+    left: 45%;
+    height: 44px;
+}
+
+.iview-controlNav a {
+    text-indent: -9999px;
+}
+
+.iview-controlNav a.iview-controlPrevNav {
+    float: left;
+    width: 50px;
+    height: 44px;
+    /*background: url('../img/slider-controls.png') no-repeat;*/
+    background: url('https://vi2.6rooms.com/live/2017/01/14/19/1002v1484392519087472938_b.jpg') no-repeat;
+}
+
+.iview-controlNav a.iview-controlNextNav {
+    float: left;
+    width: 50px;
+    height: 44px;
+    /*background: url('../img/slider-controls.png') no-repeat -50px 0px;*/
+    background: url('https://vi2.6rooms.com/live/2017/01/14/19/1002v1484392519087472938_b.jpg') no-repeat -50px 0px;
+}
+
+.iview-controlNav div.iview-items {
+    float: left;
+    padding: 0px 10px 0px 10px;
+    height: 44px;
+    background: url('https://vi2.6rooms.com/live/2017/01/14/19/1002v1484392511924412543_b.jpg');
+    /*background: url('../img/nav-bg.png');*/
+}
+
+.iview-controlNav a.iview-control {
+    padding: 0px;
+    float: left;
+    width: 11px;
+    height: 12px;
+    background: url('../img/bullets.png') no-repeat;
+    line-height: 0px;
+}
+
+.iview-controlNav a.iview-control.active {
+    background-position: 0px -12px;
+}
+
+.iview-caption {
+    background: url('https://vi3.6rooms.com/live/2017/01/14/19/1002v1484392499709723233_b.jpg');
+    /*background: url('../img/caption-bg.png');*/
+    color: #FFF;
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-family: Verdana;
+    font-size: 12px;
+    text-shadow: #000 1px 1px 0px;
+}
+
+.iview-caption.caption1 {
+    font-size: 36px;
+    font-weight: bold;
+    height: 45px;
+}
+
+.iview-caption.caption2 {
+    background: #00b4ff;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+.iview-caption.caption3 {
+    background: #FFF;
+    color: #000;
+    font-size: 26px;
+    text-shadow: none;
+}
+
+.iview-caption.caption4 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.iview-caption.caption5 {
+    background: #c4302b;
+    box-shadow: rgba(0, 0, 0, 0.7) 10px 10px 15px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+.iview-caption.caption6 {
+    font-size: 18px;
+}
+
+.iview-caption.caption7 {
+    text-align: left;
+    font-size: 11px;
+    color: #888;
+    border-radius: 0px;
+}
+
+.iview-caption.caption7 div {
+    line-height: 200%;
+}
+
+.iview-caption.caption7 h3 {
+    margin-bottom: 20px;
+    color: #FFF;
+}
+
+.iview-caption.blackcaption {
+    background: #000;
+    box-shadow: rgba(0, 0, 0, 0.7) 10px 10px 15px 0px;
+    text-shadow: none;
+}
+
+#iview-preloader {
+    border: #666 1px solid;
+    width: 150px
+}
+
+#iview-preloader div {
+    background: #666;
+}
+
+.iview-controlNav div.iview-items ul li {
+    padding: 0px;
+    float: left;
+    width: 11px;
+    height: 12px;
+    margin: 3px;
+    margin-top: 16px;
+    line-height: 0px;
+}
+
+#iview #iview-tooltip {
+    display: none;
+    position: absolute;
+    background: url('https://vi3.6rooms.com/live/2017/01/14/19/1002v1484392519462869757_b.jpg') no-repeat;
+    /*background: url('../img/tooltip.png') no-repeat;*/
+    width: 124px;
+    height: 90px;
+    bottom: 30px;
+    left: -67px;
+    padding: 10px;
+    z-index: 100;
+}
+
+#iview #iview-tooltip div.holder {
+    display: block;
+    width: 124px;
+    height: 84px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+#iview #iview-tooltip div.holder div.container {
+    display: block;
+    width: 4000px;
+}
+
+#iview #iview-tooltip div.holder div.container div {
+    float: left;
+    display: block;
+    overflow: hidden;
+    width: 124px;
+    height: 84px;
+    left: -50%;
+    text-align: center;
+}
+
+#iview #iview-tooltip div.holder div.container div img {
+    height: 84px;
+    margin: 0 auto;
+}
+
+/*====================================
+mine.css
+=================================*/
+@media (max-width: 768px) {
+    .iview-controlNav{
+        opacity: 1;
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    }
+    .iview-controlNav a.iview-controlPrevNav{
+        opacity: .5;
+        float: left;
+    }
+    .iview-items{
+        display: none;
+    }
+    .iview-controlNav a.iview-controlNextNav{
+        opacity: .5;
+        float: right;
+    }
+}
+
+body {
+    background: #494A5F;
+    color: #D5D6E2;
+}
+
+a {
+    color: rgba(255, 255, 255, 0.6);
+    outline: none;
+    text-decoration: none;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+}
+
+a:hover, a:focus {
+    color: #74777b;
+    text-decoration: none;
+}
+
+.zzsc-content {
+    margin: 20px auto;
+}
+
+body {
+    background: none repeat scroll 0 0 #000000;
+}
+.first_neon,.second_neon,.third_neon{
+    width: 33%;
+    display: table-cell;
+    padding: 16px 25px;
+    margin: auto;
+    vertical-align: middle;
+}
+.first_neon {
+    background: none repeat scroll 0 0 #000000;
+    border: 1px solid;
+    border-radius: 15px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Warnes";
+    text-align: center;
+    text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 30px #FFFFFF, 0 0 40px #FF00DE, 0 0 70px #FF00DE, 0 0 80px #FF00DE, 0 0 100px #FF00DE;
+    transition: text-shadow 0.5s ease 0s;
+
+}
+
+.first_neon:hover {
+    text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 30px #FFFFFF, 0 0 40px #00FFFF, 0 0 70px #00FFFF, 0 0 80px #00FFFF, 0 0 100px #00FFFF;
+}
+
+.second_neon {
+    border: 1px solid;
+    border-radius: 10px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Zeyada";
+    transition: text-shadow 0.5s ease 0s;
+    text-align: center;
+    text-shadow: 0 0 10px #FFFFFF, 0 0 15px #FFFFFF, 0 0 30px #FFFFFF, 0 0 40px #008000, 0 0 70px #008000, 0 0 80px #008000, 0 0 100px #008000;
+}
+
+.second_neon:hover {
+    text-shadow: 0 0 10px #FFFFFF, 0 0 20px #FFFFFF, 0 0 30px #FFFFFF, 0 0 40px #FFFF00, 0 0 70px #FFFF00, 0 0 80px #FFFF00, 0 0 100px #FFFF00;
+}
+
+.third_neon {
+    border: 1px solid;
+    border-radius: 10px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Princess Sofia";
+    transition: text-shadow 0.5s ease 0s;
+    text-align: center;
+    text-shadow: 0 0 10px #FFFFFF, 0 0 15px #FFFFFF, 0 0 30px #FFFFFF, 0 0 40px #00FFFF, 0 0 70px #00FFFF, 0 0 80px #00FFFF, 0 0 100px #00FFFF;
+}
+.third_neon>a{
+    font-family: "Princess Sofia";
+}
+
+.third_neon:hover {
+    text-shadow: 0 0 6px #FFFFFF, 0 0 15px #FFFFFF, 0 0 25px #FFFFFF, 0 0 40px #7FFF00, 0 0 70px #7FFF00, 0 0 80px #7FFF00, 0 0 100px #7FFF00;
+}
+@media(max-width: 600px){
+    .first_neon,.second_neon,.third_neon{
+        width: 33%;
+        display: inherit;
+        padding: 16px 25px;
+        margin-left: inherit;
+    }
+}
+@media(min-width: 1024px){
+    .zzsc-content{
+        width: 1024px;;
+    }
+}
