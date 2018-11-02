@@ -124,7 +124,6 @@ class MainLayout extends React.Component {
                 function (isConfirm) {
                     if (isConfirm) {
                         $.post( "/pan3/backend/api.php?m=VideoController!getImgUrlByName", {
-                            userId: userId,
                             words: _words
                         }, function (datas) {
                             if (datas.code != "00000") {
