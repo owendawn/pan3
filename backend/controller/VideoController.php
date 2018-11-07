@@ -276,7 +276,11 @@ class VideoController
             $srcs = [];
             foreach ($imgsall as $img) {
                 $src = $img->src;
-                if (strpos($src, "hiphotos.baidu") == false&&strpos($src, "qiyipic.com") == false) {
+                if (
+                    strpos($src, "hiphotos.baidu") == false
+                    &&strpos($src, "qiyipic.com") == false
+                    &&strpos($src, "iqiyipic.com") == false
+                    ) {
                     array_push($srcs, $src);
 //                    echo "<img src='" . $img->src . "' style='width:100px:height:50px;'/>";
 //                    echo $img->src;
