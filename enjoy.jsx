@@ -142,9 +142,10 @@ class MainLayout extends React.Component {
                 </div>
                 <div className="row" style={{ marginBottom: "30px" }}>
                     <div className="col-xs-12 col-sm-8 col-sm-offset-2">
-                        <form className="form-group" action="http://v.baidu.com/v?word=s">
+                        <form className="form-group" action="http://v.baidu.com/v" target="_blank">
                             <label className="col-sm-2 control-label hidden">名字</label>
                             <div className="col-xs-8">
+                                <input type="hidden" name="ie" value='utf-8'/>
                                 <input type="text"
                                     className="form-control"
                                     name="word"
