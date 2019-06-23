@@ -9,6 +9,12 @@ require_once __DIR__."/../utils/SqliteUtil.php";
 require_once __DIR__."/../utils/UUIDUtil.php";
 require_once __DIR__."/../utils/JwtUtil.php";
 
+ini_set("memory_limit", "10240M");
+require_once __DIR__ . '/../lib/phpspider/autoloader.php';
+use phpspider\core\phpspider;
+use phpspider\core\requests;
+use phpspider\core\selector;
+
 class VideoController 
 {
     public function getVideoOfAvailable()
@@ -259,43 +265,54 @@ class VideoController
         }
     }
 
-    public function getImgUrlByName()
+//     public function getImgUrlByName()
+//     {
+//         include_once(__DIR__. "/../utils/simple_html_dom.php");
+//         $html = new \simple_html_dom();
+//         $words = $_REQUEST["words"];
+//         if ($words == "") {
+//             return DataHandlerUtil::returnJson("-1", array("info" => "please fill the video's name"));
+//         } else {
+//             $html->load_file('http://v.baidu.com/v?ct=301989888&rn=20&pn=0&db=0&s=25&ie=utf-8&word=' . urlencode($words));
+//             $imgs = $html->find(".search-block .special-base-wrap img");
+//             $imgsall = $imgs;
+// //            $html->load_file('http://m.v.baidu.com/search?src=video&word='.urlencode("�ְ�ȥ�Ķ�"));
+// //            $imgs2=$html->find("#search-page>.search-bd>.search-block.search-block-tvshow>.special-base-wrap>.base-poster>img");
+// //            $imgsall=array_merge($imgs,$imgs2);
+//             $srcs = [];
+//             foreach ($imgsall as $img) {
+//                 $src = $img->src;
+//                 if (
+//                     strpos($src, "hiphotos.baidu") == false
+//                     &&strpos($src, "qiyipic.com") == false
+//                     &&strpos($src, "iqiyipic.com") == false
+//                     ) {
+//                     array_push($srcs, $src);
+//                 }
+//             }
+//             $srcs=array_unique($srcs);
+//             $set = array(); 
+//             for($i=0;$i< max(array_keys($srcs));++$i){ 
+//                 if(!empty($srcs[$i])){
+//                     array_push($set, $srcs[$i]);
+//                 }
+//             }
+//             return array("code"=>"00000","data" => $set);
+//         }
+//     }
+
+
+    public function getImgUrlByName()   
     {
-        include_once(__DIR__. "/../utils/simple_html_dom.php");
-        $html = new \simple_html_dom();
         $words = $_REQUEST["words"];
-        if ($words == "") {
-            return DataHandlerUtil::returnJson("-1", array("info" => "please fill the video's name"));
-        } else {
-            $html->load_file('http://v.baidu.com/v?ct=301989888&rn=20&pn=0&db=0&s=25&ie=utf-8&word=' . urlencode($words));
-            $imgs = $html->find("#content>.main-content .sp-cont-show>.detail-info>.poster>.poster-link>img");
-            $imgsall = $imgs;
-//            $html->load_file('http://m.v.baidu.com/search?src=video&word='.urlencode("�ְ�ȥ�Ķ�"));
-//            $imgs2=$html->find("#search-page>.search-bd>.search-block.search-block-tvshow>.special-base-wrap>.base-poster>img");
-//            $imgsall=array_merge($imgs,$imgs2);
-            $srcs = [];
-            foreach ($imgsall as $img) {
-                $src = $img->src;
-                if (
-                    strpos($src, "hiphotos.baidu") == false
-                    &&strpos($src, "qiyipic.com") == false
-                    &&strpos($src, "iqiyipic.com") == false
-                    ) {
-                    array_push($srcs, $src);
-//                    echo "<img src='" . $img->src . "' style='width:100px:height:50px;'/>";
-//                    echo $img->src;
-//                    echo "<br>";
-                }
-            }
-            $srcs=array_unique($srcs);
-            $set = array(); 
-            for($i=0;$i< max(array_keys($srcs));++$i){ 
-                if(!empty($srcs[$i])){
-                    array_push($set, $srcs[$i]);
-                }
-            }
-            return array("code"=>"00000","data" => $set);
+        $html = requests::get('http://m.v.baidu.com/search?word=' . urlencode($words));
+        $data = selector::select($html, ".search-block .special-base-wrap img", "css");
+        if(is_string($data)){
+            $set=array($data);
+        }else{
+            $set=$data;
         }
+        return array("code"=>"00000","data" => $set);
     }
 
     public function getVideoByUser()
