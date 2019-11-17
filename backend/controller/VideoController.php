@@ -307,6 +307,9 @@ class VideoController
         $words = $_REQUEST["words"];
         $html = requests::get('http://m.v.baidu.com/search?word=' . urlencode($words));
         $data = selector::select($html, ".search-block .special-base-wrap img", "css");
+        if(!isset($data)){
+            $data=array();
+        }
         if(is_string($data)){
             $set=array($data);
         }else{
