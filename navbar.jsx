@@ -180,7 +180,7 @@ class Navbar extends React.Component{
                             {!this.state.isLogin&&<div className="dummy__item"><a href="login.html">Login</a></div>}
                             {this.state.isLogin&&<div className="dummy__item"><a onClick={this.logout.bind(this)}>Logout</a></div>}
                             <div className="dummy__item"><a href="index.html">Home</a></div>
-                            <div className="dummy__item"><a href="{{$base_url}}/enjoy/enjoy" >Enjoy Video</a></div>
+                            <div className="dummy__item"><a href="enjoy.html" >Enjoy Video</a></div>
                         </div>
                     </div>
                 </div>
