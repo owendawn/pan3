@@ -70,11 +70,11 @@ class MainLayout extends React.Component {
          let url;
          that.setState({isTrash:isTrash});
         if(isTrash){
-            url="/pan3/backend/api.php?m=VideoController!getVideoOfTrash";
+            url="http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getVideoOfTrash";
             $("#hometoggle").show();
             $("#trashtoggle").hide();
         }else{
-            url= "/pan3/backend/api.php?m=VideoController!getVideoOfAvailable";
+            url= "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getVideoOfAvailable";
             $("#trashtoggle").show();
             $("#hometoggle").hide();
         }
@@ -90,9 +90,9 @@ class MainLayout extends React.Component {
         var _fun=$(dom).attr("data-fun");
         var url;
         if(_fun=="add"){
-            url="/pan3/backend/api.php?m=VideoController!addNewVideo";
+            url="http://pan.is-best.net/pan3/backend/api.php?m=VideoController!addNewVideo";
         }else if(_fun=="edit"){
-            url="/pan3/backend/api.php?m=VideoController!editVideoById"
+            url="http://pan.is-best.net/pan3/backend/api.php?m=VideoController!editVideoById"
         }
         $.post(url,$("#myModal form").serialize()+"&token="+window.localStorage.getItem("token"),function(data){
             if(data.code!="00000"){
@@ -123,7 +123,7 @@ class MainLayout extends React.Component {
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        $.post( "/pan3/backend/api.php?m=VideoController!getImgUrlByName", {
+                        $.post( "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getImgUrlByName", {
                             words: _words
                         }, function (datas) {
                             if (datas.code != "00000") {
@@ -203,7 +203,7 @@ class MainLayout extends React.Component {
         },
         function(isConfirm){
             if (isConfirm) {
-                $.post("/pan3/backend/api.php?m=VideoController!fackDeleteById", {
+                $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!fackDeleteById", {
                     "id": id,
                     token:window.localStorage.getItem("token")
                 }, function(datas) {
@@ -247,8 +247,24 @@ class MainLayout extends React.Component {
             "bServerSide": true, //每次数据修改，都请求服务器确认
             "bScrollCollapse": true,
             "sPaginationType": "full_numbers",
-            "sServerMethod": "POST",
-            "sAjaxSource": "/pan3/backend/api.php?m=VideoController!getVideoOfAvailable",
+            "sServerMethod": "GET",
+            "sAjaxSource": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getVideoOfAvailable",
+            'fnServerData' : function (sSource, aoData, fnCallback) {
+                var ps="";
+                for(var i=0;i<aoData.length;i++){
+                    var it=aoData[i];
+                    ps+="&"+it.name+"="+encodeURIComponent(it.value);
+                }
+                $.ajax({
+                    "type": "GET",
+                    "url": sSource+"&"+ps,
+                    "dataType": "jsonp",
+                    jsonp:"callback",
+                    "success": function (result) {
+                        fnCallback(result);
+                    }
+                });
+            },
             "aoColumns": [{
                 "mData": "week",
                 "sTitle": "时间",
@@ -363,7 +379,7 @@ class MainLayout extends React.Component {
         },
         function(isConfirm){
             if (isConfirm) {
-                $.post("/pan3/backend/api.php?m=VideoController!deleteById", {
+                $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!deleteById", {
                     "id": id,
                     token:window.localStorage.getItem("token")
                 }, function(datas) {
@@ -394,7 +410,7 @@ class MainLayout extends React.Component {
         },
         function(isConfirm){
             if (isConfirm) {
-                $.post("/pan3/backend/api.php?m=VideoController!reductedById", {
+                $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!reductedById", {
                     id: id,
                     token:window.localStorage.getItem("token")
                 }, function(datas) {
@@ -426,7 +442,27 @@ class MainLayout extends React.Component {
             "bScrollCollapse": true,
             "sPaginationType": "full_numbers",
             "sServerMethod": "POST",
-            "sAjaxSource": "/pan3/backend/api.php?m=VideoController!getVideoOfTrash",
+            "sAjaxSource": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getVideoOfTrash",
+            'fnServerData' : function (sSource, aoData, fnCallback,t) {
+                var ps="";
+                for(var i=0;i<aoData.length;i++){
+                    var it=aoData[i];
+                    if(it.name=='iSortCol_0'){
+                        ps+="&"+it.name+"=5";
+                    }else{
+                        ps+="&"+it.name+"="+encodeURIComponent(it.value);
+                    }
+                }
+                $.ajax({
+                    "type": "GET",
+                    "url": sSource+"&"+ps,
+                    "dataType": "jsonp",
+                    jsonp:"callback",
+                    "success": function (result) {
+                        fnCallback(result);
+                    }
+                });
+            },
             "aoColumns": [{
                 "mData": "week",
                 "sTitle": "时间",

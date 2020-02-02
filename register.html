@@ -65,7 +65,8 @@
     <!-- 添加 favicon icon -->
 
     <!--html5 旧浏览器支持-->
-    <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script> -->
 
 <!-- Load React. -->
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
@@ -299,13 +300,28 @@
         }else if(that.state.password!==that.state.passwordcheck){
             that.setState({info:"password again not as same as password!"});
         }else{
-            $.get("http://localhost/pan3/backend/api.php?m=UserController!register",this.state,function(re){
-                if(re.register){
-                    window.location.href="login.html";
-                }else{
-                    that.setState({info:re.Info});
-                }
-            },"json");
+            // $.get("http://pan.is-best.net/pan3/backend/api.php?m=UserController!register",this.state,function(re){
+            //     if(re.register){
+            //         window.location.href="login.html";
+            //     }else{
+            //         that.setState({info:re.Info});
+            //     }
+            // },"json");
+            
+            $.ajax({
+                type: "get",
+                url: "http://pan.is-best.net/pan3/backend/api.php?m=UserController!register",
+                data: this.state,
+                dataType: 'jsonp',
+                jsonp: 'callback',
+                success: function (re) {
+                    if(re.register){
+                        window.location.href="login.html";
+                    }else{
+                        that.setState({info:re.Info});
+                    }
+                },
+            });
         }
         
     }

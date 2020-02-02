@@ -49,14 +49,23 @@ class Navbar extends React.Component{
                 alert('您的浏览器不支持AJAX！');
                 return false;
             }
-            var url="backend/api.php?m=UserController!checkloginAlways";
-            xmlhttp.open("POST",url,false);
-            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlhttp.send("key="+window.localStorage.getItem("token"));
-        
-            var d=JSON.parse(xmlhttp.responseText); // 返回值
-            that.setState({isLogin:d.login});
-            that.props.checkLoginCallBack&&that.props.checkLoginCallBack(d.login);
+            var url="http://pan.is-best.net/pan3/backend/api.php?m=UserController!checkloginAlways";
+            // xmlhttp.open("POST",url,false);
+            // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=UTF-8");
+            // xmlhttp.setRequestHeader("Accept","application/json, text/javascript, */*; q=0.01");
+            // xmlhttp.send("key="+window.localStorage.getItem("token"));
+            // var d=JSON.parse(xmlhttp.responseText); // 返回值
+            // that.setState({isLogin:d.login});
+            // that.props.checkLoginCallBack&&that.props.checkLoginCallBack(d.login);
+
+            var _s=document.createElement("script");
+            var cfn="_"+new Date().getTime();
+            window[cfn]=function(d){
+                that.setState({isLogin:d.login});
+                that.props.checkLoginCallBack&&that.props.checkLoginCallBack(d.login);
+            }
+            _s.src=url+"&callback="+cfn+"&key="+window.localStorage.getItem("token");
+            document.body.appendChild(_s);
         }else{
             that.props.checkLoginCallBack&&that.props.checkLoginCallBack(false);
         }

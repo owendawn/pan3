@@ -26,11 +26,11 @@ class UserController
 
     public function login()
     {
-        $name = !empty($_GET["name"]) ? $_GET["name"] : null;
-        $pwd = !empty($_GET["password"]) ? $_GET["password"] : null;
-        $remember = !empty($_GET["remember"]) ? $_GET["remember"] : null;
+        $name = !empty($_REQUEST["name"]) ? $_REQUEST["name"] : null;
+        $pwd = !empty($_REQUEST["password"]) ? $_REQUEST["password"] : null;
+        $remember = !empty($_REQUEST["remember"]) ? $_REQUEST["remember"] : null;
 
-        $store = isset($_GET["pwdsave"]) ? $_GET["pwdsave"] : "";
+        $store = isset($_REQUEST["pwdsave"]) ? $_REQUEST["pwdsave"] : "";
         $info = "";
         try {
             $sqliteUtil = new SqliteUtil();
@@ -82,10 +82,10 @@ class UserController
 
     public function register()
     {
-        $name = $_GET["name"];
-        $pwd = $_GET["password"];
-        $pwd2 = $_GET["passwordcheck"];
-        $mail = $_GET["mail"];
+        $name = $_REQUEST["name"];
+        $pwd = $_REQUEST["password"];
+        $pwd2 = $_REQUEST["passwordcheck"];
+        $mail = $_REQUEST["mail"];
         $info = "";
         $success = false;
         if ($pwd == $pwd2) {
@@ -125,7 +125,7 @@ class UserController
 
     public function checkloginAlways()
     {
-        $encreptkey = $_POST["key"];
+        $encreptkey = $_REQUEST["key"];
         if (isset($encreptkey) && strlen($encreptkey) > 0) {
             $jwtUtil = new JwtUtil();
             $jwt = $jwtUtil->parseJwt($encreptkey);

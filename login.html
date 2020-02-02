@@ -56,7 +56,8 @@
     <link rel="shortcut icon" type="image/ico" href="http://pic.yupoo.com/owendawn/7d83eaa2/ac62287a.png"/>
     <!-- 添加 favicon icon -->
     <!--html5 旧浏览器支持-->
-    <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- <script src="//cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js"></script> -->
 
 
 
@@ -287,14 +288,30 @@ class MainLayout extends React.Component {
         }else if(that.state.password.trim()===""){
            that.setState({info:"password is required!"});
         }else{
-            $.get("/pan3/backend/api.php?m=UserController!login",this.state,function(re){
-                if(re.login){
-                    window.localStorage.setItem("token",re.token);
-                    window.location.href="index.html";
-                }else{
-                    that.setState({info:re.loginInfo});
-                }
-            },"json");
+            // $.get("http://pan.is-best.net/pan3/backend/api.php?m=UserController!login",this.state,function(re){
+            //     if(re.login){
+            //         window.localStorage.setItem("token",re.token);
+            //         window.location.href="index.html";
+            //     }else{
+            //         that.setState({info:re.loginInfo});
+            //     }
+            // },"json");
+
+            $.ajax({
+                type: "get",
+                url: "http://pan.is-best.net/pan3/backend/api.php?m=UserController!login",
+                data: this.state,
+                dataType: 'jsonp',
+                jsonp: 'callback',
+                success: function (re) {
+                    if(re.login){
+                        window.localStorage.setItem("token",re.token);
+                        window.location.href="index.html";
+                    }else{
+                        that.setState({info:re.loginInfo});
+                    }
+                },
+            });
         }
         
     }

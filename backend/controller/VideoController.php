@@ -19,14 +19,14 @@ class VideoController
 {
     public function getVideoOfAvailable()
     {
-        $sEcho = isset($_POST["sEcho"])?$_POST["sEcho"]:null;
-        $sortColIndex = isset($_POST["iSortCol_0"])?$_POST["iSortCol_0"]:null;
-        $sortType = isset($_POST["sSortDir_0"])?$_POST["sSortDir_0"]:null;
-        $sortCol = isset($_POST["mDataProp_" . $sortColIndex])?$_POST["mDataProp_" . $sortColIndex]:null;
-        $start = isset($_POST["iDisplayStart"])?$_POST["iDisplayStart"]:null;
-        $length = isset($_POST["iDisplayLength"])?$_POST["iDisplayLength"]:null;
+        $sEcho = isset($_REQUEST["sEcho"])?$_REQUEST["sEcho"]:null;
+        $sortColIndex = isset($_REQUEST["iSortCol_0"])?$_REQUEST["iSortCol_0"]:null;
+        $sortType = isset($_REQUEST["sSortDir_0"])?$_REQUEST["sSortDir_0"]:null;
+        $sortCol = isset($_REQUEST["mDataProp_" . $sortColIndex])?$_REQUEST["mDataProp_" . $sortColIndex]:null;
+        $start = isset($_REQUEST["iDisplayStart"])?$_REQUEST["iDisplayStart"]:null;
+        $length = isset($_REQUEST["iDisplayLength"])?$_REQUEST["iDisplayLength"]:null;
         if (isset($_REQUEST["token"])) {
-            $token = $_POST["token"];
+            $token = $_REQUEST["token"];
             $jwtUtil = new JwtUtil();
             $jwt=$jwtUtil->parseJwt($token);
             
@@ -73,14 +73,14 @@ class VideoController
 
     public function getVideoOfTrash()
     {
-        $sEcho = isset($_POST["sEcho"])?$_POST["sEcho"]:null;
-        $sortColIndex = isset($_POST["iSortCol_0"])?$_POST["iSortCol_0"]:null;
-        $sortType = isset($_POST["sSortDir_0"])?$_POST["sSortDir_0"]:null;
-        $sortCol = isset($_POST["mDataProp_" . $sortColIndex])?$_POST["mDataProp_" . $sortColIndex]:null;
-        $start = isset($_POST["iDisplayStart"])?$_POST["iDisplayStart"]:null;
-        $length = isset($_POST["iDisplayLength"])?$_POST["iDisplayLength"]:null;
+        $sEcho = isset($_REQUEST["sEcho"])?$_REQUEST["sEcho"]:null;
+        $sortColIndex = isset($_REQUEST["iSortCol_0"])?$_REQUEST["iSortCol_0"]:null;
+        $sortType = isset($_REQUEST["sSortDir_0"])?$_REQUEST["sSortDir_0"]:null;
+        $sortCol = isset($_REQUEST["mDataProp_" . $sortColIndex])?$_REQUEST["mDataProp_" . $sortColIndex]:null;
+        $start = isset($_REQUEST["iDisplayStart"])?$_REQUEST["iDisplayStart"]:null;
+        $length = isset($_REQUEST["iDisplayLength"])?$_REQUEST["iDisplayLength"]:null;
         if (isset($_REQUEST["token"])) {
-            $token = $_POST["token"];
+            $token = $_REQUEST["token"];
             $jwtUtil = new JwtUtil();
             $jwt=$jwtUtil->parseJwt($token);
             
@@ -130,7 +130,7 @@ class VideoController
         $link = $_REQUEST["link"];
         $image = $_REQUEST["image"];
         $time = $_REQUEST["time"];
-        $token = $_POST["token"];
+        $token = $_REQUEST["token"];
         $jwtUtil = new JwtUtil();
         $jwt=$jwtUtil->parseJwt($token);
         
@@ -164,7 +164,7 @@ class VideoController
         $link = $_REQUEST["link"];
         $image = $_REQUEST["image"];
         $time = $_REQUEST["time"];
-        $token = $_POST["token"];
+        $token = $_REQUEST["token"];
         $jwtUtil = new JwtUtil();
         $jwt=$jwtUtil->parseJwt($token);
         
@@ -192,8 +192,8 @@ class VideoController
 
     public function fackDeleteById()
     {
-        $id = $_POST["id"];
-        $token = $_POST["token"];
+        $id = $_REQUEST["id"];
+        $token = $_REQUEST["token"];
         $jwtUtil = new JwtUtil();
         $jwt=$jwtUtil->parseJwt($token);
         
@@ -217,8 +217,8 @@ class VideoController
 
     public function deleteById()
     {
-        $id = $_POST["id"];
-        $token = $_POST["token"];
+        $id = $_REQUEST["id"];
+        $token = $_REQUEST["token"];
         $jwtUtil = new JwtUtil();
         $jwt=$jwtUtil->parseJwt($token);
         
@@ -242,8 +242,8 @@ class VideoController
 
     public function reductedById()
     {
-        $id = $_POST["id"];
-        $token = $_POST["token"];
+        $id = $_REQUEST["id"];
+        $token = $_REQUEST["token"];
         $jwtUtil = new JwtUtil();
         $jwt=$jwtUtil->parseJwt($token);
         
