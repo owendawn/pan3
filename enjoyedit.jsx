@@ -78,10 +78,21 @@ class MainLayout extends React.Component {
             $("#trashtoggle").show();
             $("#hometoggle").hide();
         }
-        $.post(url, {token:window.localStorage.getItem("token")}, function (data) {
-            data = data.aaData;
-            that.setState({list:data});
-        }, "json");
+        // $.post(url, {token:window.localStorage.getItem("token")}, function (data) {
+        //     data = data.aaData;
+        //     that.setState({list:data});
+        // }, "json");
+
+        $.ajax({
+            "type": "GET",
+            "url": url+"&token="+window.localStorage.getItem("token"),
+            "dataType": "jsonp",
+            jsonp:"callback",
+            "success": function (data) {
+                data = data.aaData;
+                that.setState({list:data});
+            }
+        });
     
     }
     save(e){
@@ -94,15 +105,31 @@ class MainLayout extends React.Component {
         }else if(_fun=="edit"){
             url="http://pan.is-best.net/pan3/backend/api.php?m=VideoController!editVideoById"
         }
-        $.post(url,$("#myModal form").serialize()+"&token="+window.localStorage.getItem("token"),function(data){
-            if(data.code!="00000"){
-                swal("提醒!", data.data.info, "warning");
-            }else{
-                !PanUtil.isMobile()&&that.state.table1.fnDraw();
-                PanUtil.isMobile()&&that.toggleModel(false);
-                $('#myModal').modal("hide");
+        // $.post(url,$("#myModal form").serialize()+"&token="+window.localStorage.getItem("token"),function(data){
+        //     if(data.code!="00000"){
+        //         swal("提醒!", data.data.info, "warning");
+        //     }else{
+        //         !PanUtil.isMobile()&&that.state.table1.fnDraw();
+        //         PanUtil.isMobile()&&that.toggleModel(false);
+        //         $('#myModal').modal("hide");
+        //     }
+        // },"json");
+
+        $.ajax({
+            "type": "GET",
+            "url": url+"&"+$("#myModal form").serialize()+"&token="+window.localStorage.getItem("token"),
+            "dataType": "jsonp",
+            jsonp:"callback",
+            "success": function (data) {
+                if(data.code!="00000"){
+                    swal("提醒!", data.data.info, "warning");
+                }else{
+                    !PanUtil.isMobile()&&that.state.table1.fnDraw();
+                    PanUtil.isMobile()&&that.toggleModel(false);
+                    $('#myModal').modal("hide");
+                }
             }
-        },"json");
+        });
     }
     imgSearch(){
        let that=this;
@@ -123,20 +150,40 @@ class MainLayout extends React.Component {
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        $.post( "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getImgUrlByName", {
-                            words: _words
-                        }, function (datas) {
-                            if (datas.code != "00000") {
-                                swal("提醒!", datas.info, "warning");
-                            }else if(datas.data.length==0){
-                                swal("提醒!", "搜索结果为空，请手动输入", "warning");
-                            } else {
-                               that.setState({imgs :datas.data})
-                               that.setState({imgidx :0})
-                                $("#imgdiv .imgbtn").show();
-                                that.showImage(0);
+                        // $.post( "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getImgUrlByName", {
+                        //     words: _words
+                        // }, function (datas) {
+                        //     if (datas.code != "00000") {
+                        //         swal("提醒!", datas.info, "warning");
+                        //     }else if(datas.data.length==0){
+                        //         swal("提醒!", "搜索结果为空，请手动输入", "warning");
+                        //     } else {
+                        //        that.setState({imgs :datas.data})
+                        //        that.setState({imgidx :0})
+                        //         $("#imgdiv .imgbtn").show();
+                        //         that.showImage(0);
+                        //     }
+                        // }, "json");
+                        $.ajax({
+                            "type": "GET",
+                            "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getImgUrlByName&"+PanUtil.parseObjectToFormData( {
+                                words: _words
+                            }),
+                            "dataType": "jsonp",
+                            jsonp:"callback",
+                            "success": function (datas) {
+                                if (datas.code != "00000") {
+                                    swal("提醒!", datas.info, "warning");
+                                }else if(datas.data.length==0){
+                                    swal("提醒!", "搜索结果为空，请手动输入", "warning");
+                                } else {
+                                   that.setState({imgs :datas.data})
+                                   that.setState({imgidx :0})
+                                    $("#imgdiv .imgbtn").show();
+                                    that.showImage(0);
+                                }
                             }
-                        }, "json");
+                        });
                     }
                 });
         }
@@ -203,20 +250,40 @@ class MainLayout extends React.Component {
         },
         function(isConfirm){
             if (isConfirm) {
-                $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!fackDeleteById", {
-                    "id": id,
-                    token:window.localStorage.getItem("token")
-                }, function(datas) {
-                    if(datas.code!="00000"){
-                        swal("提醒!", datas.info, "warning");
-                    }else{
-                        !PanUtil.isMobile()&&that.state.table1.fnDraw();
-                        !PanUtil.isMobile()&&that.state.table2.fnDraw();
-                        PanUtil.isMobile()&&that.toggleModel(false);
-                        swal("成功!", "delete the row success!", "success");
-                        $('#myModal').modal("hide");
+                // $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!fackDeleteById", {
+                //     "id": id,
+                //     token:window.localStorage.getItem("token")
+                // }, function(datas) {
+                //     if(datas.code!="00000"){
+                //         swal("提醒!", datas.info, "warning");
+                //     }else{
+                //         !PanUtil.isMobile()&&that.state.table1.fnDraw();
+                //         !PanUtil.isMobile()&&that.state.table2.fnDraw();
+                //         PanUtil.isMobile()&&that.toggleModel(false);
+                //         swal("成功!", "delete the row success!", "success");
+                //         $('#myModal').modal("hide");
+                //     }
+                // }, "json");
+                $.ajax({
+                    "type": "GET",
+                    "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!fackDeleteById&"+PanUtil.parseObjectToFormData({
+                        "id": id,
+                        token:window.localStorage.getItem("token")
+                    }),
+                    "dataType": "jsonp",
+                    jsonp:"callback",
+                    "success": function (datas) {
+                        if(datas.code!="00000"){
+                            swal("提醒!", datas.info, "warning");
+                        }else{
+                            !PanUtil.isMobile()&&that.state.table1.fnDraw();
+                            !PanUtil.isMobile()&&that.state.table2.fnDraw();
+                            PanUtil.isMobile()&&that.toggleModel(false);
+                            swal("成功!", "delete the row success!", "success");
+                            $('#myModal').modal("hide");
+                        }
                     }
-                }, "json");
+                });
             }
         });
     }
@@ -379,19 +446,39 @@ class MainLayout extends React.Component {
         },
         function(isConfirm){
             if (isConfirm) {
-                $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!deleteById", {
-                    "id": id,
-                    token:window.localStorage.getItem("token")
-                }, function(datas) {
-                    if(datas.code!="00000"){
-                        swal("提醒!", datas.info, "warning");
-                    }else{
-                        !PanUtil.isMobile()&&that.state.table2.fnDraw();
-                        PanUtil.isMobile()&&that.toggleModel(true);
-                        swal("成功!", "delete the row success!", "success");
-                        $('#myModal').modal("hide");
+                // $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!deleteById", {
+                //     "id": id,
+                //     token:window.localStorage.getItem("token")
+                // }, function(datas) {
+                //     if(datas.code!="00000"){
+                //         swal("提醒!", datas.info, "warning");
+                //     }else{
+                //         !PanUtil.isMobile()&&that.state.table2.fnDraw();
+                //         PanUtil.isMobile()&&that.toggleModel(true);
+                //         swal("成功!", "delete the row success!", "success");
+                //         $('#myModal').modal("hide");
+                //     }
+                // }, "json");
+
+                $.ajax({
+                    "type": "GET",
+                    "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!deleteById&"+PanUtil.parseObjectToFormData({
+                        "id": id,
+                        token:window.localStorage.getItem("token")
+                    }),
+                    "dataType": "jsonp",
+                    jsonp:"callback",
+                    "success": function (datas) {
+                        if(datas.code!="00000"){
+                            swal("提醒!", datas.info, "warning");
+                        }else{
+                            !PanUtil.isMobile()&&that.state.table2.fnDraw();
+                            PanUtil.isMobile()&&that.toggleModel(true);
+                            swal("成功!", "delete the row success!", "success");
+                            $('#myModal').modal("hide");
+                        }
                     }
-                }, "json");
+                });
             }
         });
     }
@@ -410,20 +497,41 @@ class MainLayout extends React.Component {
         },
         function(isConfirm){
             if (isConfirm) {
-                $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!reductedById", {
-                    id: id,
-                    token:window.localStorage.getItem("token")
-                }, function(datas) {
-                    if(datas.code!="00000"){
-                        swal("提醒!", datas.info, "warning");
-                    }else{
-                        !PanUtil.isMobile()&&that.state.table1.fnDraw();
-                        !PanUtil.isMobile()&&that.state.table2.fnDraw();
-                        PanUtil.isMobile()&&that.toggleModel(true);
-                        swal("成功!", "delete the row success!", "success");
-                        $('#myModal').modal("hide");
+                // $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!reductedById", {
+                //     id: id,
+                //     token:window.localStorage.getItem("token")
+                // }, function(datas) {
+                //     if(datas.code!="00000"){
+                //         swal("提醒!", datas.info, "warning");
+                //     }else{
+                //         !PanUtil.isMobile()&&that.state.table1.fnDraw();
+                //         !PanUtil.isMobile()&&that.state.table2.fnDraw();
+                //         PanUtil.isMobile()&&that.toggleModel(true);
+                //         swal("成功!", "delete the row success!", "success");
+                //         $('#myModal').modal("hide");
+                //     }
+                // }, "json");
+
+                $.ajax({
+                    "type": "GET",
+                    "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!reductedById&"+PanUtil.parseObjectToFormData( {
+                        id: id,
+                        token:window.localStorage.getItem("token")
+                    }),
+                    "dataType": "jsonp",
+                    jsonp:"callback",
+                    "success": function (datas) {
+                        if(datas.code!="00000"){
+                            swal("提醒!", datas.info, "warning");
+                        }else{
+                            !PanUtil.isMobile()&&that.state.table1.fnDraw();
+                            !PanUtil.isMobile()&&that.state.table2.fnDraw();
+                            PanUtil.isMobile()&&that.toggleModel(true);
+                            swal("成功!", "delete the row success!", "success");
+                            $('#myModal').modal("hide");
+                        }
                     }
-                }, "json");
+                });
             }
         });
     }
