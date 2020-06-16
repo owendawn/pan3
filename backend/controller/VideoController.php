@@ -17,6 +17,27 @@ use phpspider\core\selector;
 
 class VideoController 
 {
+
+    public function getDateTime()
+    {
+        try {
+            $sqliteUtil = new SqliteUtil();
+            $db = $sqliteUtil->getDB();
+            $ps = $db->prepare("SELECT datetime('now','+8 hour') as dt,datetime(CURRENT_TIMESTAMP,'localtime') as localtime");
+            $rs = $ps->execute();
+            $row = array();
+            $i = 0;
+            if ($res = $rs->fetchArray(SQLITE3_ASSOC)) {
+                $row = $res;
+                $i++;
+            }
+
+            return array("data" => $row ,  "code" => 200);
+        } catch (\Exception $e) {
+            return array("code" => 500, "info" => $e->getMessage());
+        }
+    }
+    
     public function getVideoOfAvailable()
     {
         $sEcho = isset($_REQUEST["sEcho"])?$_REQUEST["sEcho"]:null;
