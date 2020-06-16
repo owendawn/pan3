@@ -181,7 +181,7 @@ document.writeln(
 );
 
 document.writeln('<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>');
-!window.jQuery.modal &&
+!jQuery.fn.modal &&
   document.write(
     '<script src="//cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>'
   );
