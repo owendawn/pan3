@@ -6,7 +6,12 @@ class Navbar extends React.Component{
             isLogin:false
         }
     }
-    componentDidMount(){
+    componentDidMount() {
+        try {
+            window.parent.referer;
+            window.location.href = "http://pan.is-best.net/iframe.php?" + window.location.href
+        } catch (e) { }
+        repackageHref()
         let that=this;
 
         let nav=document.getElementById("navbar-content");

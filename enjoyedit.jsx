@@ -82,17 +82,10 @@ class MainLayout extends React.Component {
         //     data = data.aaData;
         //     that.setState({list:data});
         // }, "json");
-
-        $.ajax({
-            "type": "GET",
-            "url": url+"&token="+window.localStorage.getItem("token"),
-            "dataType": "jsonp",
-            jsonp:"callback",
-            "success": function (data) {
-                data = data.aaData;
-                that.setState({list:data});
-            }
-        });
+        PanUtil.iframePostMessage("post",url, {token:window.localStorage.getItem("token")}, function (data) {
+            data = data.aaData;
+            that.setState({list:data});
+        }, "json");
     
     }
     save(e){
@@ -115,12 +108,9 @@ class MainLayout extends React.Component {
         //     }
         // },"json");
 
-        $.ajax({
-            "type": "GET",
-            "url": url+"&"+$("#myModal form").serialize()+"&token="+window.localStorage.getItem("token"),
-            "dataType": "jsonp",
-            jsonp:"callback",
-            "success": function (data) {
+        PanUtil.iframePostMessage( "GET",
+             url+"&"+$("#myModal form").serialize()+"&token="+window.localStorage.getItem("token"),
+            {}, function (data) {
                 if(data.code!="00000"){
                     swal("提醒!", data.data.info, "warning");
                 }else{
@@ -129,7 +119,7 @@ class MainLayout extends React.Component {
                     $('#myModal').modal("hide");
                 }
             }
-        });
+        );
     }
     imgSearch(){
        let that=this;
@@ -164,14 +154,11 @@ class MainLayout extends React.Component {
                         //         that.showImage(0);
                         //     }
                         // }, "json");
-                        $.ajax({
-                            "type": "GET",
-                            "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getImgUrlByName&"+PanUtil.parseObjectToFormData( {
+                        PanUtil.iframePostMessage( "GET",
+                             "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getImgUrlByName&"+PanUtil.parseObjectToFormData( {
                                 words: _words
                             }),
-                            "dataType": "jsonp",
-                            jsonp:"callback",
-                            "success": function (datas) {
+                            {}, function (datas) {
                                 if (datas.code != "00000") {
                                     swal("提醒!", datas.info, "warning");
                                 }else if(datas.data.length==0){
@@ -183,7 +170,7 @@ class MainLayout extends React.Component {
                                     that.showImage(0);
                                 }
                             }
-                        });
+                        );
                     }
                 });
         }
@@ -264,15 +251,12 @@ class MainLayout extends React.Component {
                 //         $('#myModal').modal("hide");
                 //     }
                 // }, "json");
-                $.ajax({
-                    "type": "GET",
-                    "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!fackDeleteById&"+PanUtil.parseObjectToFormData({
+                PanUtil.iframePostMessage( "GET",
+                    "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!fackDeleteById&"+PanUtil.parseObjectToFormData({
                         "id": id,
                         token:window.localStorage.getItem("token")
                     }),
-                    "dataType": "jsonp",
-                    jsonp:"callback",
-                    "success": function (datas) {
+                    {}, function (datas) {
                         if(datas.code!="00000"){
                             swal("提醒!", datas.info, "warning");
                         }else{
@@ -283,7 +267,7 @@ class MainLayout extends React.Component {
                             $('#myModal').modal("hide");
                         }
                     }
-                });
+                );
             }
         });
     }
@@ -322,15 +306,21 @@ class MainLayout extends React.Component {
                     var it=aoData[i];
                     ps+="&"+it.name+"="+encodeURIComponent(it.value);
                 }
-                $.ajax({
-                    "type": "GET",
-                    "url": sSource+"&"+ps,
-                    "dataType": "jsonp",
-                    jsonp:"callback",
-                    "success": function (result) {
+                // $.ajax({
+                //     "type": "GET",
+                //     "url": sSource+"&"+ps,
+                //     "dataType": "jsonp",
+                //     jsonp:"callback",
+                //     "success": function (result) {
+                //         fnCallback(result);
+                //     }
+                // });
+                PanUtil.iframePostMessage( "GET",
+                    sSource+"&"+ps,{},
+                     function (result) {
                         fnCallback(result);
                     }
-                });
+                );
             },
             "aoColumns": [{
                 "mData": "week",
@@ -460,15 +450,12 @@ class MainLayout extends React.Component {
                 //     }
                 // }, "json");
 
-                $.ajax({
-                    "type": "GET",
-                    "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!deleteById&"+PanUtil.parseObjectToFormData({
+                PanUtil.iframePostMessage( "GET",
+                     "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!deleteById&"+PanUtil.parseObjectToFormData({
                         "id": id,
                         token:window.localStorage.getItem("token")
                     }),
-                    "dataType": "jsonp",
-                    jsonp:"callback",
-                    "success": function (datas) {
+                    {}, function (datas) {
                         if(datas.code!="00000"){
                             swal("提醒!", datas.info, "warning");
                         }else{
@@ -478,7 +465,7 @@ class MainLayout extends React.Component {
                             $('#myModal').modal("hide");
                         }
                     }
-                });
+                );
             }
         });
     }
@@ -512,15 +499,12 @@ class MainLayout extends React.Component {
                 //     }
                 // }, "json");
 
-                $.ajax({
-                    "type": "GET",
-                    "url": "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!reductedById&"+PanUtil.parseObjectToFormData( {
+                PanUtil.iframePostMessage( "GET",
+                     "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!reductedById&"+PanUtil.parseObjectToFormData( {
                         id: id,
                         token:window.localStorage.getItem("token")
                     }),
-                    "dataType": "jsonp",
-                    jsonp:"callback",
-                    "success": function (datas) {
+                    {}, function (datas) {
                         if(datas.code!="00000"){
                             swal("提醒!", datas.info, "warning");
                         }else{
@@ -531,7 +515,7 @@ class MainLayout extends React.Component {
                             $('#myModal').modal("hide");
                         }
                     }
-                });
+                );
             }
         });
     }
@@ -561,15 +545,21 @@ class MainLayout extends React.Component {
                         ps+="&"+it.name+"="+encodeURIComponent(it.value);
                     }
                 }
-                $.ajax({
-                    "type": "GET",
-                    "url": sSource+"&"+ps,
-                    "dataType": "jsonp",
-                    jsonp:"callback",
-                    "success": function (result) {
+                // $.ajax({
+                //     "type": "GET",
+                //     "url": sSource+"&"+ps,
+                //     "dataType": "jsonp",
+                //     jsonp:"callback",
+                //     "success": function (result) {
+                //         fnCallback(result);
+                //     }
+                // });
+                PanUtil.iframePostMessage( "GET",
+                     sSource+"&"+ps,
+                    {}, function (result) {
                         fnCallback(result);
                     }
-                });
+                );
             },
             "aoColumns": [{
                 "mData": "week",

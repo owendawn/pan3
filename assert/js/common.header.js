@@ -122,28 +122,28 @@ function loadCss(src, succ, fail) {
   };
 }
 
-function loadJs(src,succ,fail){
+function loadJs(src, succ, fail) {
   var node = document.createElement("script");
   node.type = 'text/javascript';
-  
-  var ok=false;
-  node.onload=function(){
-    
-    succ&&succ(node);
-    ok=true;
+
+  var ok = false;
+  node.onload = function () {
+
+    succ && succ(node);
+    ok = true;
   }
   node.src = src;
   document.head.append(node);
-  setTimeout(function(){
-    !ok&&fail&&fail()
-  },2000);
-  
+  setTimeout(function () {
+    !ok && fail && fail()
+  }, 2000);
+
 }
 //-----------------------------
-
+document.writeln("<script src='./assert/util/PanUtil.js'></script>")
 // <!--html5 旧浏览器支持-->
-loadJs("https://cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js",null,function(){
-    loadJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js",null,null)
+loadJs("https://cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.min.js", null, function () {
+  loadJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js", null, null)
 })
 
 
@@ -164,19 +164,34 @@ document.writeln(
 
 console.log("noBootstrapCss", window.noBootstrapCss);
 if (!window.noBootstrapCss) {
-  loadCss( "https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css",null, function (node) {
-        loadCss("https://cdn.staticfile.org/twitter-bootstrap/3.3.0/css/bootstrap.min.css");
+  loadCss("https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css", null, function (node) {
+    loadCss("https://cdn.staticfile.org/twitter-bootstrap/3.3.0/css/bootstrap.min.css");
   });
 }
-loadCss( "https://cdn.bootcss.com/normalize/2.1.3/normalize.min.css",null, function (node) {
-        loadCss("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
-  });
+loadCss("https://cdn.bootcss.com/normalize/2.1.3/normalize.min.css", null, function (node) {
+  loadCss("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+});
 
 document.writeln(
   '<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">'
 );
 
 
-document.onload=function(){
+document.onload = function () {
   document.body.append('<iframe src="http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getDateTime&callback=_" style="display:none;"></iframe>');
+}
+
+function repackageHref() {
+  var as = document.getElementsByTagName('a')
+  for (let i = 0; i < as.length; i++) {
+    const element = as[i];
+    element.onclick = function (e) {
+      e.preventDefault();
+      PanUtil.iframePostMessage("redirect",
+        element.href,
+        null, (re) => {
+
+        });
+    }
+  }
 }

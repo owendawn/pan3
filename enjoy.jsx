@@ -36,36 +36,7 @@ class MainLayout extends React.Component {
 
     init(){
         let that = this;
-        $.ajax({
-            type: "get",
-            url: "http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getVideoByUser",
-            data: { token: window.localStorage.getItem("token") },
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            beforeSend: function (xhr) {   //beforeSend定义全局变量
-            },
-            success: function (data) {
-                var counts = data.data.length, ready = 0;
-                if (data.success) {
-                    that.setState({ list: data.data });
-                    that.setState({ list1: data.data.filter((it, idx) => idx % 2 === 0) });
-                    that.setState({ list2: data.data.filter((it, idx) => idx % 2 === 1) });
-                    $("img").one("load", function () {
-                        ready++;
-                        if (ready == counts) {
-                            if (!PanUtil.isMobile()) {
-                                that.animate();
-                            } else {
-                                $('#gallery-container').sGallery({
-                                    fullScreenEnabled: false
-                                });
-                            }
-                            ready = 0;
-                        }
-                    });
-                }
-            },
-        });
+        
         // $.post("http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getVideoByUser", { token: window.localStorage.getItem("token") }, function (data) {
         //     var counts = data.data.length, ready = 0;
         //     if (data.success) {
@@ -87,6 +58,28 @@ class MainLayout extends React.Component {
         //         });
         //     }
         // }, "json");
+        
+        PanUtil.iframePostMessage("post","http://pan.is-best.net/pan3/backend/api.php?m=VideoController!getVideoByUser", { token: window.localStorage.getItem("token") }, function (data) {
+            var counts = data.data.length, ready = 0;
+            if (data.success) {
+                that.setState({ list: data.data });
+                that.setState({ list1: data.data.filter((it, idx) => idx % 2 === 0) });
+                that.setState({ list2: data.data.filter((it, idx) => idx % 2 === 1) });
+                $("img").one("load", function () {
+                    ready++;
+                    if (ready == counts) {
+                        if (!PanUtil.isMobile()) {
+                            that.animate();
+                        } else {
+                            $('#gallery-container').sGallery({
+                                fullScreenEnabled: false
+                            });
+                        }
+                        ready = 0;
+                    }
+                });
+            }
+        });
     }
     createScriptElement(src){
         let script = document.createElement("SCRIPT");

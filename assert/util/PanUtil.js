@@ -148,6 +148,42 @@ PanUtil = {
         _s.src=url+"&"+jsonpName+"="+cfn+"&"+this.parseObjectToFormData(data);
         document.body.appendChild(_s);
     },
+    jsonPostMessage:function(url,data,succ){
+        var _s=document.createElement("iframe");
+        _s.style="height:0"
+        var cfn="panutil_"+new Date().getTime();
+        window.addEventListener("message", function(e){
+            var data=JSON.parse(e.data)
+            console.log(data)
+            if(data.type==="PanPostMessage"&&data.panpostmsgid===cfn){
+                succ(data.data,data,e)
+            }
+        }, false);
+        if(url.indexOf("?")<0){
+        	url+="?";
+        }
+        _s.src=url+"&panpostmsgid="+cfn+"&"+this.parseObjectToFormData(data);
+        document.body.appendChild(_s);
+    },
+    iframePostMessage:function(type,url,data,succ){
+        var cfn="paniframe_"+new Date().getTime();
+        var _call=function(e){
+            var data=JSON.parse(e.data)
+            // console.log(data)
+            if(data.type==="PanIframe"&&data.paniframeid===cfn){
+                succ(data.result,data)
+                window.removeEventListener("message", _call);
+            }
+        }
+        window.addEventListener("message", _call, false);
+        window.parent.postMessage(JSON.stringify({
+            type:"PanIframe",
+            paniframeid:cfn,
+            url:url,
+            method:type,
+            data:data
+        }), '*');
+    },
     //url参数解析
     getURLSearchParams: function() {
         if (window.location.search == "") {
@@ -284,6 +320,31 @@ PanUtil = {
             return Math.round(num/(1000)*end)/end+"K";
         }else{
             return Math.round(num*end)/end+"B";
+        }
+    },
+    decodeValue:function(data){
+        if(arguments.length>1){
+            var map={};
+            for (var i = 1; i <arguments.length ; i=i+2) {
+                if(i+1<arguments.length){
+                    map[arguments[i]]=arguments[i+1];
+                }
+            }
+            if(arguments.length%2===0){
+                if(map[data]){
+                    return map[data];
+                }else{
+                    return arguments[arguments.length-1];
+                }
+            }else{
+                if(map[data]){
+                    return map[data];
+                }else{
+                    return data;
+                }
+            }
+        }else{
+            return data;
         }
     }
 };
