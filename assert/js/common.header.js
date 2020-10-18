@@ -185,13 +185,15 @@ function repackageHref() {
   var as = document.getElementsByTagName('a')
   for (let i = 0; i < as.length; i++) {
     const element = as[i];
-    element.onclick = function (e) {
-      e.preventDefault();
-      PanUtil.iframePostMessage("redirect",
-        element.href,
-        null, (re) => {
+    if(element.href){
+      element.onclick = function (e) {
+        e.preventDefault();
+        PanUtil.iframePostMessage("redirect",
+          element.href,
+          null, (re) => {
 
-        });
+          });
+      }
     }
   }
 }
